@@ -17,7 +17,6 @@ b2.addEventListener("click", stp, true);
 b3.addEventListener("click", start, true);
 b4.addEventListener("click", add, false);
 for (var i=0; i<n; i++){
-		//document.getElementById('registers').innerHTML+="<tr><td>R"+parseInt(i+1)+"</td><td><input id='r" + parseInt(i) + "' type='number' value='0' min='0'></input></td></tr>";
 		document.getElementById('registers').innerHTML+="<tr><td>R" + (i + 1) +"</td><td><input id='r" + i + "' type='number' value='0' min='0'></input></td></tr>";
 		}
 }
@@ -49,7 +48,7 @@ function stp(){
 	if(command=="Z") registers[args[0]-1] = 0;
 	else if (command=="S") registers[args[0]-1] ++;
 	else if (command=="T") registers[args[1]-1] = registers[args[0]-1];
-	else if (command=="J" && registers[args[0]-1] == registers[args[1]-1]) step = args[2];
+	else if (command=="J" && registers[args[0]-1] == registers[args[1]-1]) step = parseInt(args[2]);
 	show_regs();
 }
 
