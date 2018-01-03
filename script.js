@@ -7,7 +7,16 @@ var args; // arguments
 var step = 1;
 
 function init(){
-	for (var i=0; i<n; i++){
+var b1 = document.getElementById("load");
+var b2 = document.getElementById("stp");
+var b3 = document.getElementById("start");
+var b4 = document.getElementById("add");
+
+b1.addEventListener("click", load, true);
+b2.addEventListener("click", stp, true);
+b3.addEventListener("click", start, true);
+b4.addEventListener("click", add, false);
+for (var i=0; i<n; i++){
 		//document.getElementById('registers').innerHTML+="<tr><td>R"+parseInt(i+1)+"</td><td><input id='r" + parseInt(i) + "' type='number' value='0' min='0'></input></td></tr>";
 		document.getElementById('registers').innerHTML+="<tr><td>R" + (i + 1) +"</td><td><input id='r" + i + "' type='number' value='0' min='0'></input></td></tr>";
 		}
@@ -68,3 +77,5 @@ function add(){
 	n++;
 	document.getElementById('registers').innerHTML += "<tr><td>R" + n + "</td><td><input id='r" + n + "' type='number' value='0' min='0'></input></td></tr>";
 }
+
+window.addEventListener("load", init, false);
