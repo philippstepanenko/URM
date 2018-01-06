@@ -9,6 +9,12 @@ table{
 	text-align: left;
 	margin: auto; 
 }
+.label{
+	width: 20px;
+}
+.value{
+	width: 90px;
+}
 input {
-	width: 100px;
+	width: 90px;
 }

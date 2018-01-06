@@ -1,4 +1,4 @@
-var n = 5; // number of registers
+var n = 0; // number of registers
 var registers = [];
 var regs;
 var program; 
@@ -6,18 +6,20 @@ var command; // command
 var args; // arguments
 var step = 1;
 
+
 function init(){
 var b1 = document.getElementById("load");
-var b2 = document.getElementById("stp");
+var b2 = document.getElementById("step");
 var b3 = document.getElementById("start");
 var b4 = document.getElementById("add");
+var reg = document.getElementById("registers");
 
 b1.addEventListener("click", load, true);
-b2.addEventListener("click", stp, true);
+b2.addEventListener("click", current_step, true);
 b3.addEventListener("click", start, true);
 b4.addEventListener("click", add, false);
-for (var i=0; i<n; i++){
-		document.getElementById('registers').innerHTML+="<tr><td>R" + (i + 1) +"</td><td><input id='r" + i + "' type='number' value='0' min='0'></input></td></tr>";
+for (var i=0; i<5; i++){
+		add();
 		}
 }
 
@@ -34,7 +36,7 @@ function load(){
 	con("loaded");
 }
 
-function stp(){
+function current_step(){
 	if (program.length<=step-1) {
 		con("stopped");
 		return;
@@ -54,9 +56,9 @@ function stp(){
 
 function start(){
 	while (program.length>step-1){
-		stp();
+		current_step();
 	}
-	stp();
+	current_step();
 }
 
 function show_regs(){
@@ -74,7 +76,26 @@ function con(str){
 
 function add(){
 	n++;
-	document.getElementById('registers').innerHTML += "<tr><td>R" + n + "</td><td><input id='r" + n + "' type='number' value='0' min='0'></input></td></tr>";
+	var reg = document.getElementById('registers');
+	// add line
+	var tr = document.createElement("tr");
+	reg.appendChild(tr);
+	// add label
+	var td = document.createElement("td"),
+			label = document.createTextNode("R"+n+" ");
+	td.setAttribute("class","label");
+	td.appendChild(label);
+	tr.appendChild(td);
+	// add input
+	var td = document.createElement("td"),
+			value = document.createElement("input");
+	td.setAttribute("class","value");
+	value.setAttribute("id","r"+ n);
+	value.setAttribute("type","number");
+	value.setAttribute("value",0);
+	value.setAttribute("min",0);
+	td.appendChild(value);
+	tr.appendChild(td);
 }
 
 window.addEventListener("load", init, false);
