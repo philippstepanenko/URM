@@ -27,6 +27,10 @@ function load(){
 	// load registers
 	regs = document.getElementsByTagName('input');
 	for (var i=0; i<n; i++){
+		if (regs[i].value == ""){
+			regs[i].value=0;
+			document.getElementById('r'+(i+1)).value=regs[i].value;
+		}
 		registers[i]=parseInt(regs[i].value);
 	}
 	// load program
