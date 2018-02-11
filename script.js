@@ -43,7 +43,7 @@ function load(){
 function current_step(){
 	if (program.length<=step-1) {
 		con("stopped");
-		return;
+		return false;
 	}
 	else{
 		con(step);
@@ -54,13 +54,20 @@ function current_step(){
 	if(command=="Z") registers[args[0]-1] = 0;
 	else if (command=="S") registers[args[0]-1] ++;
 	else if (command=="T") registers[args[1]-1] = registers[args[0]-1];
-	else if (command=="J" && registers[args[0]-1] == registers[args[1]-1]) step = parseInt(args[2]);
+	else if (command=="J") {
+		if (registers[args[0]-1] == registers[args[1]-1]) step = parseInt(args[2]);
+		}
+	else {
+		con("error in line " + parseInt(step-1));
+		step = program.length;
+		return false;
+	}
 	show_regs();
 }
 
 function start(){
 	while (program.length>step-1){
-		current_step();
+		if (current_step() == false) return;
 	}
 	current_step();
 }
