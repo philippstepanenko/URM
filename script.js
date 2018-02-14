@@ -5,7 +5,7 @@ var program;
 var command; // command
 var args; // arguments
 var step = 1;
-
+var f = 0; // flag
 
 function init(){
 var b1 = document.getElementById("load");
@@ -38,38 +38,54 @@ function load(){
 	step = 1;
 	// show step
 	con("loaded");
+	f=1;
 }
 
 function current_step(){
-	if (program.length<=step-1) {
-		con("stopped");
-		return false;
-	}
-	else{
-		con(step);
-		step++;
-	}
-	command = program[step-2].split(' ')[0].toUpperCase();
-	args = program[step-2].substr(2).split(' ');
-	if(command=="Z") registers[args[0]-1] = 0;
-	else if (command=="S") registers[args[0]-1] ++;
-	else if (command=="T") registers[args[1]-1] = registers[args[0]-1];
-	else if (command=="J") {
-		if (registers[args[0]-1] == registers[args[1]-1]) step = parseInt(args[2]);
+	if (f==1){
+		if (program.length<=step-1){
+			con("stopped");
+			return false;
 		}
-	else {
-		con("error in line " + parseInt(step-1));
-		step = program.length;
-		return false;
+		else{
+			con(step);
+			step++;
+		}
+		command = program[step-2].split(' ')[0].toUpperCase();
+		args = program[step-2].substr(program[step-2].search(' ')+1).split(' ');
+		if(command=="Z" && args.length==1 && args[0] != ""){
+			registers[args[0]-1] = 0;
+		}
+		else if (command=="S" && args.length==1 && args[0] != ""){
+					registers[args[0]-1] ++;
+		}
+		else if (command=="T" && args.length==2 && (args[0] != "" || args[1] != "")){
+					registers[args[1]-1] = registers[args[0]-1];
+		}
+		else if (command=="J" && args.length==3 && (args[0] != "" || args[1] != "" || args[2] != "")) {
+						if (registers[args[0]-1] == registers[args[1]-1]) step = parseInt(args[2]);
+					}
+		else {
+			error();
+			return false;
+		}
+		show_regs();
 	}
-	show_regs();
+}
+
+function error(){
+	f=0;
+	con("error in line " + parseInt(step-1));
+	step = program.length+2;
 }
 
 function start(){
-	while (program.length>step-1){
-		if (current_step() == false) return;
+	if (f==1){
+		while (program.length>step-1){
+			if (current_step() == false) return false;
+		}
+		current_step();
 	}
-	current_step();
 }
 
 function show_regs(){
@@ -82,7 +98,7 @@ function show_regs(){
 function con(str){
 	str = typeof str == "number" ? "line " + str : str;
 	document.getElementById('console').innerHTML="<b>status:</b> "+str;
-	console.log(str);
+	//console.log(str);
 }
 
 function add(){
