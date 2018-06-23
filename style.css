@@ -1,17 +1,37 @@
+:root{
+	--color1: #7777ff;
+	--color2: #ffffff;
+	--font-size: 20px;
+	--font-size2: 40px;
+}
+*{
+	font-size: var(--font-size);
+}
+h1{
+	font-size: var(--font-size2);
+}
 #header{
 	text-align: center;
 }
-#program {
-	width: 80px;
-	height: 118px;
+textarea{
+	margin-top:5px;
+	width: 200px; /*80px;*/
+	height: 256px; /*118px;*/
+	line-height: 38px;
 }
 table{
 	text-align: left;
 	margin: auto; 
 }
-.label{
-	width: 20px;
-}
 input{
 	width: 90px;
+	height: 28px;
+
+}
+button{
+	background: var(--color1);
+	color: var(--color2);
+}
+.label{
+	width: 20px;
 }

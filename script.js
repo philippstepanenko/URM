@@ -25,7 +25,7 @@ function init(){
 	b3.addEventListener("click", start, true);
 	b4.addEventListener("click", add, false);
 
-	for (let i = 0; i < 5; i++){
+	for (let i = 0; i < 7; i++){
 			add();
 			}
 }
@@ -105,7 +105,7 @@ function show_regs(){
 
 function cons(str){
 	str = typeof str == "number" ? "line " + str : str;
-	document.getElementById('console').innerHTML = `<b>status:</b> ${str}`;
+	document.getElementById('console').innerHTML = `<b>Status:</b> ${str}`;
 	//console.log(str);
 }
 
