@@ -12,9 +12,6 @@ table{
 .label{
 	width: 20px;
 }
-.value{
-	width: 90px;
-}
-input {
+input{
 	width: 90px;
 }
