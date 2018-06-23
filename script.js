@@ -5,8 +5,6 @@ let regs;
 let program, command, args;
 let step = 1;
 
-let x;
-
 // UI variables
 let b1, b2, b3, b4; // buttons
 let reg, tr, td, label, value; // register tags
